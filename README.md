@@ -20,6 +20,8 @@ Dialogrutan **New Project** visas.
 ####Steg 4
 Visual Studio skapar ett nytt konsolprojekt som placerats i en egen ”solution” med samma namn som projektet. Det nya projektet innehåller bland annat filen Program.cs.Filer är organiserade i projekt och ett projekt kan innehålla flera filer som tillsammans utgör applikationen. Projekt är organiserade i ”solutions”. En ”solution” kan innehålla flera projekt. Fönstret **Solution Explorer** innehåller projekt och filer. Filen ```Program.cs``` innehåller klassen ```Program``` med metoden ```Main``` och därmed är minimikraven uppfyllda för att du nu ska kunna köra applikationen.
 
+**Program.cs**
+
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -50,7 +52,44 @@ Källkoden i Program.cs kompileras till IL-kod (”Intermediate Language”) som
 Applikationen körs och ett tomt konsolfönster, förutom texten ```Press any key to continue``` som Visual Studio lagt dit, visas. Stäng konsolfönstret genom att trycka på vilken tangent som helst på tangentbordet. 
 
 ####Steg 7
+Applikationen ska simulera tärningskast. Ett tal mellan 1 och 6 kan representera ett tärningskast. Resultatet av ett tärningskast måste sparas i en variabel vars värde sedan presenteras i konsolfönstret.
+
+1. Deklarera en variabel, med namnet roll, av typen int och initiera den till värdet 4.
+1. Presentera variabelns värde.
+
+**Program.cs**
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DieRollsFrequencyTable
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // >>> Lägg till kommande två rader. <<<
+            int roll = 4;
+            Console.WriteLine(roll);
+        }
+    }
+}
+```
+
 ####Steg 8
+Testa applikationen genom att välj menykommandot **Debug ► Start Without Debugging**, eller tryck ner tangentbordkombinationen ```Ctrl + F5```. (Gjorda förändringar sparas automatiskt i samband med att ett projekt exekveras).
+
+*Konsolfönstret*
+
+```shell
+4
+Press any key to continue...
+```
+
 ####Steg 9
 ####Steg 10
 ####Steg 11
