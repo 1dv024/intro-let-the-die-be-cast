@@ -65,7 +65,7 @@ Applikationen körs och ett tomt konsolfönster, förutom texten ```Press any ke
 *Konsolfönstret*
 
 ```
-Press any key to continue...
+Press any key to continue . . .
 ```
 
 ####Steg 7
@@ -106,7 +106,7 @@ Testa applikationen genom att välj menykommandot **Debug ► Start Without Debu
 
 ```
 4
-Press any key to continue...
+Press any key to continue . . .
 ```
 
 ####Steg 9
@@ -115,6 +115,8 @@ Resultatet av ett tärningskast slumpas inte på något vis av applikationen uta
 
 1. Skapa och initiera en referensvariabel, med namnet die (som betyder tärning på engelska), av typen Random att referera till ett objekt av typen Random.
 1. Istället för att tilldela variabeln roll värdet 4 ska variabeln tilldelas värdet som metoden Next() returnerar. I detta fall kommer ```die.Next(1, 7)``` att returnera ett värde av typen int i det slutna intervallet mellan 1 och 6.
+
+**Program.cs**
   
 ```csharp
 using System;
@@ -146,8 +148,9 @@ Kör applikationen flera gånger och konstatera att värden mellan 1 och 6 skriv
 
 Applikationen kan nu simulera ett tärningskast. Kravet är att mellan 100 och 1000 tärningskast ska kunna simuleras. Hur ska applikationen göra för att simulera t.ex. 273 tärningskast?
 
-Det kan enklast göras genom att låta en ”for”-sats omsluta satserna som slumpar och skriver ut. (Deklarationerna av variablerna placeras lämpligen innan "for"-satsen så att de bara skapas en gång istället för 273 gånger.) 
+Det kan enklast göras genom att låta en ”*for*”-sats omsluta satserna som slumpar och skriver ut. (Deklarationerna av variablerna ```die``` och ```roll``` placeras lämpligen innan "*for*"-satsen så att de bara skapas en gång istället för 273 gånger.) 
 
+**Program.cs**
 
 ```csharp
 using System;
@@ -176,8 +179,81 @@ namespace DieRollsFrequencyTable
 ```
 
 ####Steg 12
+
+Antalet tärningskast är nu ”hårdkodat” till 273. Användaren av applikationen ska kunna ange ett heltal i det slutna intervallet mellan 100 och 1000.
+
+1. Deklarera variabeln ```count```.
+1. Skriv ut ledtexten "Ange antalet tärningskast [100-1000]: ".
+1. Läs in och tolka heltalet användaren matat in och lagra värdet i ```count```.
+1. Ersätt ```273``` med ```count``` i ”*for*”-satsens villkorsuttryck.
+ 
+```charp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DieRollsFrequencyTable
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int count;
+            Random die = new Random();
+            int roll;
+
+            Console.Write("Ange antal tärningskast [100-1000]: ");
+            count = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < count; i++)
+            {
+                roll = die.Next(1, 7);
+                Console.WriteLine(roll);
+            }
+        }
+    }
+}
+```
+
 ####Steg 13
+
+Hur många gånger har du hittills sparat de ändringar du gjort? Inte någon gång? Huuu! Hög tid att klicka på knappen **Save All** som sparar alla öppna filer som har osparade ändringar. Ta för vana att spara ofta, t.ex. efter varje sats. ```Ctrl + S```, som sparar filen som har fokus, ska sitta i ryggmärgen.
+
 ####Steg 14
+
+Efter att ett antal förändringar är gjorda är det lämpligt att testa applikationen igen.
+
+```
+...
+3
+1
+1
+6
+5
+2
+1
+4
+2
+1
+3
+6
+3
+1
+5
+2
+5
+5
+2
+6
+3
+2
+3
+4
+Press any key to continue . . .
+```
+
 ####Steg 15
 ####Steg 16
 ####Steg 17
