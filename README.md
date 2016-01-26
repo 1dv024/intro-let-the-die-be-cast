@@ -90,7 +90,6 @@ namespace DieRollsFrequencyTable
     {
         static void Main(string[] args)
         {
-            // >>> Lägg till kommande två rader. <<<
             int roll = 4;
             Console.WriteLine(roll);
         }
