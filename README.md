@@ -357,7 +357,7 @@ namespace DieRollsFrequencyTable
 
             for (int i = 0; i < count; i++)
             {
-                frequncyTable[die.Next(0, 6)]++;
+                frequncyTable[die.Next(6)]++;
             }
 
             foreach (int value in frequncyTable)
@@ -371,7 +371,7 @@ namespace DieRollsFrequencyTable
 
 ####Steg 18
 
-Testa applikationen och konstatera att applikationen inte längre kraschar.  Det går fortfarande att mata in ett tal som inte är i det slutna intervallet mellan 1 och 100!
+Testa applikationen och konstatera att applikationen inte längre kraschar.  Det går fortfarande att mata in ett tal som inte är i det slutna intervallet mellan 100 och 1000!
 
 *Konsolfönstret*
 
@@ -388,15 +388,578 @@ Press any key to continue . . .
 ```
 
 ####Steg 19
+
+I samband med inläsningen måste validering ske av värdet så att det ligger i det slutna intervallet mellan 100 och 1000.
+
+Villkorsuttrycket i ”*do-while*”-satsen måste kompletteras så att det undersöker om det inlästa värdet är större eller lika med 100 och att det är mindre eller lika med 1000.
+
+**Program.cs**
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DieRollsFrequencyTable
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int count;
+            Random die = new Random();
+            int[] frequncyTable = new int[6];
+
+            do
+            {
+                Console.Write("Ange antal tärningskast [100-1000]: ");
+            } while (!(int.TryParse(Console.ReadLine(), out count) &&
+                     count >= 100 && 
+                     count <= 1000));
+
+            for (int i = 0; i < count; i++)
+            {
+                frequncyTable[die.Next(6)]++;
+            }
+
+            foreach (int value in frequncyTable)
+            {
+                Console.WriteLine(value);
+            }
+        }
+    }
+}
+```
+
 ####Steg 20
+
+Vid test av applikationen ska det nu vara omöjligt att mata in något annat än ett heltal i det slutna intervallet mellan 100 och 1000.
+
+*Konsolfönstret*
+
+```
+Ange antal tärningskast [100-1000]: 59
+Ange antal tärningskast [100-1000]: 1548
+Ange antal tärningskast [100-1000]: etthundraåttifem
+Ange antal tärningskast [100-1000]: 742
+122
+126
+133
+116
+125
+120
+Press any key to continue . . .
+```
+
+Den första punkten under steg 16 är nu åtgärdad. Återstår att åtgärda den andra punkten, d.v.s. att låta applikationen presentera frekvenstabellen på ett något bättre sätt så att t.ex. tärningssidan framgår:
+
+```
+Ettor:	107
+Tvåor:	114
+…
+Sexor:	113
+```
+
 ####Steg 21
+
+Applikationen måste känna till vad tärningssidorna kallas. Lämpligt kan då vara att låta en array innehålla de strängar som beskriver tärningens sidor. Då frekvenstabellen sedan presenteras kan respektive sträng skrivas ut tillsammans med resultatet.
+
+1. Lägg till en sats som skapar referensvariabeln ```facets```, av typen ```string[]```, och initiera den med en array innehållande de sex strängar som var och en beskriver tärningens sidor.
+1. Ersätt ”*foreach*”-satsen med en ”*for*”-sats som skriver ut varje tärningssida med tillhörande värde i frekvenstabellen.
+
+**Program.cs**
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DieRollsFrequencyTable
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int count;
+            Random die = new Random();
+            string[] facets = {"Ettor", "Tvåor", "Treor", "Fyror", "Femmor", "Sexor"};
+            int[] frequncyTable = new int[6];
+
+            do
+            {
+                Console.Write("Ange antal tärningskast [100-1000]: ");
+            } while (!(int.TryParse(Console.ReadLine(), out count) &&
+                     count >= 100 && 
+                     count <= 1000));
+
+            for (int i = 0; i < count; i++)
+            {
+                frequncyTable[die.Next(6)]++;
+            }
+
+            for (int i = 0; i < facets.Length; i++)
+            {
+                Console.WriteLine($"{facets[i]}: {frequncyTable[i]}");
+            }
+        }
+    }
+}
+```
+
+>Det är inte optimalt med en lösning som kräver synkronisering av två olika arrayer. En bättre lösning kan t.ex. vara att använda en associativ array (”dictionary”), men den konstruktionen får vänta till längre fram i kursen.
+
 ####Steg 22
+
+Kör applikationen på nytt. Nu ska det tydligare framgå hur många ettor, tvåor, o.s.v. som har slumpats fram. Lägg märke till att tabellen är något svår att läsa då en-, tio- och hundratal inte står under varandra.
+
+*Konsolfönstret*
+
+```
+Ange antal tärningskast [100-1000]: 742
+Ettor: 147
+Tvåor: 118
+Treor: 109
+Fyror: 118
+Femmor: 124
+Sexor: 126
+Press any key to continue . . .
+```
+
 ####Steg 23
+
+Värden (strängar, heltal, etc.) som skrivs ut med hjälp av en formatspecificerare kan justeras på olika sätt. Den förändrade ```WrtiteLine```-satsen ser till att tärningssidan vänsterjusteras med en fältbredd på sex tecken, och resultatet högerjusteras med en fältbredd på fyra tecken.
+
+**Program.cs**
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DieRollsFrequencyTable
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int count;
+            Random die = new Random();
+            string[] facets = {"Ettor", "Tvåor", "Treor", "Fyror", "Femmor", "Sexor"};
+            int[] frequncyTable = new int[6];
+
+            do
+            {
+                Console.Write("Ange antal tärningskast [100-1000]: ");
+            } while (!(int.TryParse(Console.ReadLine(), out count) &&
+                     count >= 100 && 
+                     count <= 1000));
+
+            for (int i = 0; i < count; i++)
+            {
+                frequncyTable[die.Next(6)]++;
+            }
+
+            for (int i = 0; i < facets.Length; i++)
+            {
+                Console.WriteLine($"{facets[i], -6}: {frequncyTable[i], 4}");
+            }
+        }
+    }
+}
+```
+
 ####Steg 24
+
+En körnng av applikationen visar att den nu beträffande användargränssnittet är acceptabel, men har kanske en hel del övrigt att önska, bl.a. saknas felmeddelande vid felaktig inmatning.
+
+*Konsolfönstret*
+
+```
+Ange antal tärningskast [100-1000]: sexhundra
+Ange antal tärningskast [100-1000]: 1200
+Ange antal tärningskast [100-1000]: 42
+Ange antal tärningskast [100-1000]: 600
+Ettor :  105
+Tvåor :   82
+Treor :  131
+Fyror :  106
+Femmor:   88
+Sexor :   88
+Press any key to continue . . .
+```
+ 
+Applikationen uppfyller nu det löst ställda kraven bättre beträffande användargränssnittet. Men hur är det med kvalitéten beträffande koden?
+
+- All kod är skriven i en och samma metod. Ofta vinner även mindre applikationer på att omstruktureras i flera metoder. Det blir då lättar att förstå och därmed underhålla koden.
+- Avsaknaden av kommentarer är total vilket försvårar förståelse av koden.
+
 ####Steg 25
+
+Placera koden som har hand om inläsningen av antal tärningskast som ska simuleras i en separat metod med namnet ```ReadNumberOfRolls()```. Metoden anropas och värdet metoden returnerar lagras i den lokala variabeln ```count```.
+
+**Program.cs**
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DieRollsFrequencyTable
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int count;
+            Random die = new Random();
+            string[] facets = {"Ettor", "Tvåor", "Treor", "Fyror", "Femmor", "Sexor"};
+            int[] frequncyTable = new int[6];
+
+            count = ReadNumberOfRolls();
+
+            for (int i = 0; i < count; i++)
+            {
+                frequncyTable[die.Next(6)]++;
+            }
+
+            for (int i = 0; i < facets.Length; i++)
+            {
+                Console.WriteLine($"{facets[i], -6}: {frequncyTable[i], 4}");
+            }
+        }
+
+        private static int ReadNumberOfRolls()
+        {
+            int count;
+
+            do
+            {
+                Console.Write("Ange antal tärningskast [100-1000]: ");
+            } while (!(int.TryParse(Console.ReadLine(), out count) &&
+                       count >= 100 &&
+                       count <= 1000));
+
+            return count;
+        }
+    }
+}
+```
+
 ####Steg 26
+
+Även skapandet av frekvenstabellen och presentationen av den kan omstruktureras i två separata metoder.
+
+Trots att koden fortfarande inte innehåller några kommentarer är den lättare att förstå då metodernas namn har valts med omsorg och beskriver väl vad respektive metod har till uppgift.
+
+**Program.cs**
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DieRollsFrequencyTable
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int count;
+            int[] frequncyTable;
+
+            count = ReadNumberOfRolls();
+
+            frequncyTable = CreateDieRollsFrequencyTable(count);
+
+            ViewFrequencyTable(frequncyTable);
+        }
+
+        private static int[] CreateDieRollsFrequencyTable(int count)
+        {
+            int[] frequncyTable = new int[6];
+            Random die = new Random();
+
+            for (int i = 0; i < count; i++)
+            {
+                frequncyTable[die.Next(6)]++;
+            }
+
+            return frequncyTable;
+        }
+
+        private static int ReadNumberOfRolls()
+        {
+            int count;
+
+            do
+            {
+                Console.Write("Ange antal tärningskast [100-1000]: ");
+            } while (!(int.TryParse(Console.ReadLine(), out count) &&
+                       count >= 100 &&
+                       count <= 1000));
+
+            return count;
+        }
+
+        private static void ViewFrequencyTable(int[] frequncyTable)
+        {
+            string[] facets = { "Ettor", "Tvåor", "Treor", "Fyror", "Femmor", "Sexor" };
+
+            for (int i = 0; i < facets.Length; i++)
+            {
+                Console.WriteLine($"{facets[i],-6}: {frequncyTable[i],4}");
+            }
+        }
+    }
+}
+```
+
 ####Steg 27
+
+Då användaren råkar mata in något som inte kan tolkas som ett heltal i det slutna intervallet mellan 100 och 1000 visas inget felmeddelande. Metoden ReadNumberOfRolls() måste skrivas om så att så sker.
+
+**Program.cs - ReadNumberOfRolls**
+
+```csharp
+        private static int ReadNumberOfRolls()
+        {
+            int count;
+
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Ange antal tärningskast [100-1000]: ");
+                    count = int.Parse(Console.ReadLine());
+                    if (count >= 100 && count <= 1000)
+                    {
+                        throw new ApplicationException();
+                    }
+
+                    return count;
+                }
+                catch (Exception)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\nFEL! Ange ett heltal mellan 100 och 1000.\n");
+                    Console.ResetColor();
+                }
+            }
+        }
+```
+
 ####Steg 28
+
+Kör applikationen och att mata in några felaktiga värden. Felmeddelande visas då användaren matar in något som inte kan tolkas som ett heltal i det slutna intervallet mellan 100 och 1000.
+
+*Konsolfönstret*
+
+```
+Ange antal tärningskast [100-1000]: tvåhundra
+
+FEL! Ange ett heltal mellan 100 och 1000.
+
+Ange antal tärningskast [100-1000]: 42
+
+FEL! Ange ett heltal mellan 100 och 1000.
+
+Ange antal tärningskast [100-1000]: 1300
+
+FEL! Ange ett heltal mellan 100 och 1000.
+
+Ange antal tärningskast [100-1000]: 240
+Ettor :   38
+Tvåor :   40
+Treor :   38
+Fyror :   36
+Femmor:   43
+Sexor :   45
+Press any key to continue . . .
+```
+
 ####Steg 29
+
+Presentationen av frekvenstabellen behöver åtgärdas så den liknar en tabell.
+
+**Program.cs - ViewFrequencyTable**
+
+```csharp
+        private static void ViewFrequencyTable(int[] frequncyTable)
+        {
+            string[] facets = { "Ettor", "Tvåor", "Treor", "Fyror", "Femmor", "Sexor" };
+
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n----------------");
+            Console.WriteLine(" Frekvenstabell ");
+            Console.WriteLine("----------------");
+            Console.ResetColor();
+            for (int i = 0; i < facets.Length; i++)
+            {
+                Console.WriteLine($" {facets[i],-7} | {frequncyTable[i],4}");
+                Console.WriteLine("----------------");
+            }
+        }
+```
+
 ####Steg 30
+
+Kör applikationen och verifiera att frekvenstabellen nu påminner mer om en tabell än tidigare.
+
+*Konsolfönstret*
+
+```
+Ange antal tärningskast [100-1000]: 600
+
+----------------
+ Frekvenstabell
+----------------
+ Ettor   |  110
+----------------
+ Tvåor   |  106
+----------------
+ Treor   |  112
+----------------
+ Fyror   |   97
+----------------
+ Femmor  |   77
+----------------
+ Sexor   |   98
+----------------
+Press any key to continue . . .
+```
+
 ####Steg 31
+
+Kod ska alltid dokumenteras. Nedan visar hur källkoden blir enklare att förstår när den kompletterats med kommentarer, vilka självklart ska skrivas samtidigt som koden skrivs och inte efter att all kod skrivits klart.
+
+**Program.cs**
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DieRollsFrequencyTable
+{
+    /// <summary>
+    /// Applikationen simulerar tärningskast och presenterar utfallet i 
+    /// form av en frekvenstabell.
+    /// </summary>
+    class Program
+    {
+        /// <summary>
+        /// Startpunkt för applikationen.
+        /// </summary>
+        /// <param name="args">Argument som kan skickas till applikationen (används 
+        /// inte).</param>
+        static void Main(string[] args)
+        {
+            // Deklarerar lokala variabler.
+            int count;
+            int[] frequncyTable;
+
+            // Läser in hur många tärningskast som ska simuleras då
+            // en frekvenstabell över tärningskast skapas och presenteras.
+            count = ReadNumberOfRolls();
+
+            frequncyTable = CreateDieRollsFrequencyTable(count);
+
+            ViewFrequencyTable(frequncyTable);
+        }
+
+        /// <summary>
+        /// Simulerar tärningskast, skapar och returnerar frekvenstabell över utfallet.
+        /// </summary>
+        /// <param name="count">Antal tärningskast att simulera.</param>
+        /// <returns>Array innehållande frekvenstabell över simulerade 
+        /// tärningskast.</returns>
+        private static int[] CreateDieRollsFrequencyTable(int count)
+        {
+            // Deklarerar lokala variabler.
+            int[] frequncyTable = new int[6];
+            Random die = new Random();
+
+            // Slumpar tärningskast och uppdaterar frekvenstabellen som därefter 
+            // returneras.
+            for (int i = 0; i < count; i++)
+            {
+                frequncyTable[die.Next(6)]++;
+            }
+
+            return frequncyTable;
+        }
+
+        /// <summary>
+        /// Efterfrågar, läser in och returnerar antalet tärningskast som ska simuleras.
+        /// </summary>
+        /// <returns>Antal tärningskast.</returns>
+        private static int ReadNumberOfRolls()
+        {
+            // Deklarerar lokala variabler.
+            int count;
+
+            // Läser in och returnerar ett heltal mellan 100 och 1000.
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Ange antal tärningskast [100-1000]: ");
+                    count = int.Parse(Console.ReadLine());
+                    if (count < 100 || count > 1000)
+                    {
+                        throw new ApplicationException();
+                    }
+
+                    return count;
+                }
+                catch (Exception)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\nFEL! Ange ett heltal mellan 100 och 1000.\n");
+                    Console.ResetColor();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Presenterar en frekvenstabell över tärningskast.
+        /// </summary>
+        /// <param name="frequncyTable">Referens till frekvenstabell i form av en array
+        /// innehållade utfallet av tärningskast.</param>
+        private static void ViewFrequencyTable(int[] frequncyTable)
+        {
+            // Deklarerar lokal variabel.
+            string[] facets = { "Ettor", "Tvåor", "Treor", "Fyror", "Femmor", "Sexor" };
+
+            // Går igenom tärningssida för tärningssida och skriver ut tärningssidans 
+            // namn samt antalet gånger sidan "kommit upp" vid ett tärningskast. 
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n----------------");
+            Console.WriteLine(" Frekvenstabell ");
+            Console.WriteLine("----------------");
+            Console.ResetColor();
+            for (int i = 0; i < facets.Length; i++)
+            {
+                Console.WriteLine($" {facets[i],-7} | {frequncyTable[i],4}");
+                Console.WriteLine("----------------");
+            }
+        }
+    }
+}
+```
