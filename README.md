@@ -15,7 +15,7 @@ Du ska skapa ett projekt för en konsolapplikation med C#, välj därför **File
 Dialogrutan **New Project** visas.
 
 1. Markera **Visual C#** under **Installed**, **Templates**.
-2. Kontrollera så att **.NET Framework 4.5** visas i den nedrullningsbara listrutan.
+2. Kontrollera så att (minst)  **.NET Framework 4.6.1** visas i den nedrullningsbara listrutan.
 3. Markera **Console Application**.
 4. Vid **Name** skriver du in projektets namn (```DieRollsFrequencyTable```).
 5. Ange vid **Location** en lämplig katalog där projektet ska sparas (t.ex. ```C:\Projects```).
