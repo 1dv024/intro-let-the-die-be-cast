@@ -90,8 +90,8 @@ namespace DieRollsFrequencyTable
     {
         static void Main(string[] args)
         {
-            int roll = 4;
-            Console.WriteLine(roll);
+*            int roll = 4;
+*            Console.WriteLine(roll);
         }
     }
 }
