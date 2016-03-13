@@ -321,7 +321,7 @@ Press any key to continue . . .
 Applikationen uppfyller nu de löst ställda kraven och en frekvenstabell över ett antal tärningskast skrivs ut. Men hur är det med kvalitéten på användargränssnittet?
 
 - Användaren uppmanas att mata in ett heltal i det slutna intervallet mellan 100 och 1000. Men vad händer om användaren matar in något som inte kan tolkas som ett heltal? Vad händer om användaren matar in t.ex. 13? Ska det gå?
-- Presentationen av frekvenstabellen har en del övrigt att önska. Vad betyder 129? Vad betyder 163?
+- Presentationen av frekvenstabellen har en del övrigt att önska. Vad betyder 146? Vad betyder 132?
 
 Allvarligaste problemet är första punkten ovan eftersom om användaren matar in något som inte kan tolkas som ett heltal så kraschar applikationen.
 
