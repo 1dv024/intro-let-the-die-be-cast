@@ -308,7 +308,7 @@ Kör applikationen och konstatera att något som kan vara en frekvenstabell skri
 *Konsolfönstret*
 
 ```
-Ange antal tärningskast [100-1000]: 87
+Ange antal tärningskast [100-1000]: 873
 146
 142
 148
