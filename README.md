@@ -740,7 +740,7 @@ Då användaren råkar mata in något som inte kan tolkas som ett heltal i det s
                 {
                     Console.Write("Ange antal tärningskast [100-1000]: ");
                     count = int.Parse(Console.ReadLine());
-                    if (count >= 100 && count <= 1000)
+                    if (!(count >= 100 && count <= 1000))
                     {
                         throw new ApplicationException();
                     }
