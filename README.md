@@ -289,7 +289,7 @@ namespace DieRollsFrequencyTable
 
             for (int i = 0; i < count; i++)
             {
-                frequncyTable[die.Next(1, 7)]++;
+                frequncyTable[die.Next(6)]++;
             }
 
             foreach (int value in frequncyTable)
