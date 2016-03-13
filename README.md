@@ -50,7 +50,7 @@ namespace DieRollsFrequencyTable
 }
 ```
 
-####Stegt 5
+####Steg 5
 
 För att köra applikationen välj menykommandot **Debug ► Start Without Debugging**, eller tryck ner tangentbordkombinationen ```Ctrl + F5```.
 
