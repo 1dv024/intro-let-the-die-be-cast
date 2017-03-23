@@ -1,16 +1,20 @@
-##Tärningen är kastad!
+## Tärningen är kastad!
+
+>__Denna instruktion gäller Visual Studio 2015 och .NET Framework.__
+
+>__Använder du Visual Studio Code och .NET Core 1.1__ kan du i vissa avseenden följa punkterna nedan, då specikellt de som rör programkod. De punkter som är relaterade till kommandon i Visual Studio är inte direkt applicerbara i Visual Studio Code.
 
 Du ska följa ”steg för steg”-instruktionen i denna introduktionsuppgift och skapa en konsolapplikation med C# och Visual Studio 2015. Applikationen ska slumpa i det slutna intervallet mellan 100 till 1000 tärningskast och presentera en frekvenstabell över förekomsten av ettor, tvåor, osv.
 
-####Steg 1
+#### Steg 1
 
 Starta Visual Studio 2015.
 
-####Steg 2
+#### Steg 2
 
 Du ska skapa ett projekt för en konsolapplikation med C#, välj därför **File ► New ► Project...**.
 
-####Steg 3
+#### Steg 3
 
 Dialogrutan **New Project** visas.
 
@@ -20,7 +24,7 @@ Dialogrutan **New Project** visas.
 4. Vid **Name** skriver du in projektets namn (```DieRollsFrequencyTable```).
 5. Ange vid **Location** en lämplig katalog där projektet ska sparas (t.ex. ```C:\Projects```).
 
-####Steg 4
+#### Steg 4
 
 Visual Studio skapar ett nytt konsolprojekt som placerats i en egen ”solution” med samma namn som projektet. Det nya projektet innehåller bland annat filen ```Program.cs```.
 
@@ -50,15 +54,15 @@ namespace DieRollsFrequencyTable
 }
 ```
 
-####Steg 5
+#### Steg 5
 
 För att köra applikationen välj menykommandot **Debug ► Start Without Debugging**, eller tryck ner tangentbordkombinationen ```Ctrl + F5```.
 
->#####Vad händer med källkoden i Program.cs?
+>##### Vad händer med källkoden i Program.cs?
 >
 Källkoden i ```Program.cs``` kompileras till IL-kod (”Intermediate Language”) som placeras i en ny fil, Program.exe, en ”*assembly*”. Vid exekvering av applikationen ansvarar en virtuell maskin kallad CLR (”*Common Language Runtime*”), en central del av dotnetramverket (.NET Framework), för att IL-koden i ”*assemblyn*” ”j*ust-in-time*”-kompileras till maskinkod som sedan exekveras.
 
-####Steg 6
+#### Steg 6
 
 Applikationen körs och ett tomt konsolfönster, förutom texten ```Press any key to continue``` som Visual Studio lagt dit, visas. Stäng konsolfönstret genom att trycka på vilken tangent som helst på tangentbordet. 
 
@@ -68,7 +72,7 @@ Applikationen körs och ett tomt konsolfönster, förutom texten ```Press any ke
 Press any key to continue . . .
 ```
 
-####Steg 7
+#### Steg 7
 
 Applikationen ska simulera tärningskast. Ett tal mellan 1 och 6 kan representera ett tärningskast. Resultatet av ett tärningskast måste sparas i en variabel vars värde sedan presenteras i konsolfönstret.
 
@@ -97,7 +101,7 @@ namespace DieRollsFrequencyTable
 }
 ```
 
-####Steg 8
+#### Steg 8
 
 Testa applikationen genom att välj menykommandot **Debug ► Start Without Debugging**, eller tryck ner tangentbordkombinationen ```Ctrl + F5```. (Gjorda förändringar sparas automatiskt i samband med att ett projekt exekveras).
 
@@ -108,7 +112,7 @@ Testa applikationen genom att välj menykommandot **Debug ► Start Without Debu
 Press any key to continue . . .
 ```
 
-####Steg 9
+#### Steg 9
 
 Resultatet av ett tärningskast slumpas inte på något vis av applikationen utan är vad som kallas ”hårkodat” till värdet 4. För att slumpa ett värde i det slutna intervallet mellan 1 och 6 måste ett objekt av typen Random användas.
 
@@ -139,11 +143,11 @@ namespace DieRollsFrequencyTable
 }
 ```
 
-####Steg 10
+#### Steg 10
 
 Kör applikationen flera gånger och konstatera att värden mellan 1 och 6 skrivs ut i konsolfönstren.
 
-####Steg 11
+#### Steg 11
 
 Applikationen kan nu simulera ett tärningskast. Kravet är att mellan 100 och 1000 tärningskast ska kunna simuleras. Hur ska applikationen göra för att simulera t.ex. 273 tärningskast?
 
@@ -177,7 +181,7 @@ namespace DieRollsFrequencyTable
 }
 ```
 
-####Steg 12
+#### Steg 12
 
 Antalet tärningskast är nu ”hårdkodat” till 273. Användaren av applikationen ska kunna ange ett heltal i det slutna intervallet mellan 100 och 1000.
 
@@ -218,11 +222,11 @@ namespace DieRollsFrequencyTable
 }
 ```
 
-####Steg 13
+#### Steg 13
 
 Hur många gånger har du hittills sparat de ändringar du gjort? Inte någon gång? Huuu! Hög tid att klicka på knappen **Save All** som sparar alla öppna filer som har osparade ändringar. Ta för vana att spara ofta, t.ex. efter varje sats. ```Ctrl + S```, som sparar filen som har fokus, ska sitta i ryggmärgen.
 
-####Steg 14
+#### Steg 14
 
 Efter att ett antal förändringar är gjorda är det lämpligt att testa applikationen igen.
 
@@ -257,7 +261,7 @@ Efter att ett antal förändringar är gjorda är det lämpligt att testa applik
 Press any key to continue . . .
 ```
 
-####Steg 15
+#### Steg 15
 
 Applikationen kan nu simulera av användaren angivet antal tärningskast. Men hur ska en frekvenstabell över tärningskasten kunna skrivas ut? För att kunna skriva ut en frekvenstabell måste applikationen räkna antalet framslumpade ettor, tvåor, o.s.v. En träning har sex sidor varför en variabel med plats för sex värden behövs, en så kallad array.
 
@@ -301,7 +305,7 @@ namespace DieRollsFrequencyTable
 }
 ```
  
-####Steg 16
+#### Steg 16
 
 Kör applikationen och konstatera att något som kan vara en frekvenstabell skrivs ut i konsolfönstret.
 
@@ -325,7 +329,7 @@ Applikationen uppfyller nu de löst ställda kraven och en frekvenstabell över 
 
 Allvarligaste problemet är första punkten ovan eftersom om användaren matar in något som inte kan tolkas som ett heltal så kraschar applikationen.
 
-####Steg 17
+#### Steg 17
 
 Eventuella fel i samband med inläsning av antalet tärningskast som ska göras måste hanteras.
 Satsen som sköter inläsningen måste ersättas av ”*do-while*”-satsen, som får omsluta satsen som skriver ut ledtexten.
@@ -368,7 +372,7 @@ namespace DieRollsFrequencyTable
 }
 ```
 
-####Steg 18
+#### Steg 18
 
 Testa applikationen och konstatera att applikationen inte längre kraschar.  Det går fortfarande att mata in ett tal som inte är i det slutna intervallet mellan 100 och 1000!
 
@@ -386,7 +390,7 @@ Ange antal tärningskast [100-1000]: 1
 Press any key to continue . . .
 ```
 
-####Steg 19
+#### Steg 19
 
 I samband med inläsningen måste validering ske av värdet så att det ligger i det slutna intervallet mellan 100 och 1000.
 
@@ -432,7 +436,7 @@ namespace DieRollsFrequencyTable
 }
 ```
 
-####Steg 20
+#### Steg 20
 
 Vid test av applikationen ska det nu vara omöjligt att mata in något annat än ett heltal i det slutna intervallet mellan 100 och 1000.
 
@@ -461,7 +465,7 @@ Tvåor:	114
 Sexor:	113
 ```
 
-####Steg 21
+#### Steg 21
 
 Applikationen måste känna till vad tärningssidorna kallas. Lämpligt kan då vara att låta en array innehålla de strängar som beskriver tärningens sidor. Då frekvenstabellen sedan presenteras kan respektive sträng skrivas ut tillsammans med resultatet.
 
@@ -511,7 +515,7 @@ namespace DieRollsFrequencyTable
 
 >Det är inte optimalt med en lösning som kräver synkronisering av två olika arrayer. En bättre lösning kan t.ex. vara att använda en associativ array (”dictionary”), men den konstruktionen får vänta till längre fram i kursen.
 
-####Steg 22
+#### Steg 22
 
 Kör applikationen på nytt. Nu ska det tydligare framgå hur många ettor, tvåor, o.s.v. som har slumpats fram. Lägg märke till att tabellen är något svår att läsa då en-, tio- och hundratal inte står under varandra.
 
@@ -528,7 +532,7 @@ Sexor: 126
 Press any key to continue . . .
 ```
 
-####Steg 23
+#### Steg 23
 
 Värden (strängar, heltal, etc.) som skrivs ut med hjälp av en formatspecificerare kan justeras på olika sätt. Den förändrade ```WrtiteLine```-satsen ser till att tärningssidan vänsterjusteras med en fältbredd på sex tecken, och resultatet högerjusteras med en fältbredd på fyra tecken.
 
@@ -573,7 +577,7 @@ namespace DieRollsFrequencyTable
 }
 ```
 
-####Steg 24
+#### Steg 24
 
 En körnng av applikationen visar att den nu beträffande användargränssnittet är acceptabel, men har kanske en hel del övrigt att önska, bl.a. saknas felmeddelande vid felaktig inmatning.
 
@@ -598,7 +602,7 @@ Applikationen uppfyller nu det löst ställda kraven bättre beträffande använ
 - All kod är skriven i en och samma metod. Ofta vinner även mindre applikationer på att omstruktureras i flera metoder. Det blir då lättar att förstå och därmed underhålla koden.
 - Avsaknaden av kommentarer är total vilket försvårar förståelse av koden.
 
-####Steg 25
+#### Steg 25
 
 Placera koden som har hand om inläsningen av antal tärningskast som ska simuleras i en separat metod med namnet ```ReadNumberOfRolls()```. Metoden anropas och värdet metoden returnerar lagras i den lokala variabeln ```count```.
 
@@ -652,7 +656,7 @@ namespace DieRollsFrequencyTable
 }
 ```
 
-####Steg 26
+#### Steg 26
 
 Även skapandet av frekvenstabellen och presentationen av den kan omstruktureras i två separata metoder.
 
@@ -723,7 +727,7 @@ namespace DieRollsFrequencyTable
 }
 ```
 
-####Steg 27
+#### Steg 27
 
 Då användaren råkar mata in något som inte kan tolkas som ett heltal i det slutna intervallet mellan 100 och 1000 visas inget felmeddelande. Metoden ReadNumberOfRolls() måste skrivas om så att så sker.
 
@@ -758,7 +762,7 @@ Då användaren råkar mata in något som inte kan tolkas som ett heltal i det s
         }
 ```
 
-####Steg 28
+#### Steg 28
 
 Kör applikationen och att mata in några felaktiga värden. Felmeddelande visas då användaren matar in något som inte kan tolkas som ett heltal i det slutna intervallet mellan 100 och 1000.
 
@@ -787,7 +791,7 @@ Sexor :   45
 Press any key to continue . . .
 ```
 
-####Steg 29
+#### Steg 29
 
 Presentationen av frekvenstabellen behöver åtgärdas så den liknar en tabell.
 
@@ -812,7 +816,7 @@ Presentationen av frekvenstabellen behöver åtgärdas så den liknar en tabell.
         }
 ```
 
-####Steg 30
+#### Steg 30
 
 Kör applikationen och verifiera att frekvenstabellen nu påminner mer om en tabell än tidigare.
 
@@ -839,7 +843,7 @@ Ange antal tärningskast [100-1000]: 600
 Press any key to continue . . .
 ```
 
-####Steg 31
+#### Steg 31
 
 Kod ska alltid dokumenteras. Nedan visar hur källkoden blir enklare att förstår när den kompletterats med kommentarer, vilka självklart ska skrivas samtidigt som koden skrivs och inte efter att all kod skrivits klart.
 
