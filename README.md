@@ -2,7 +2,7 @@
 
 >__Denna instruktion gäller Visual Studio 2015 och .NET Framework.__
 
->__Använder du Visual Studio Code och .NET Core 1.1__ kan du i vissa avseenden följa punkterna nedan, då specikellt de som rör programkod. De punkter som är relaterade till kommandon i Visual Studio 2015 är inte direkt applicerbara i Visual Studio Code.
+>__Använder du Visual Studio Code och .NET Core 1.1__ kan du i vissa avseenden följa punkterna nedan, då specikellt de som rör programkod. De punkter som är relaterade till kommandon i Visual Studio 2015 är inte direkt applicerbara i Visual Studio Code. För att kunna mata in data från tangenbordet måste du i VSCode köra med en extrn terminal. Öppna `launch.json` och ändra `"console": "internalConsole"` till `"console": "externalTerminal"`.
 
 Du ska följa ”steg för steg”-instruktionen i denna introduktionsuppgift och skapa en konsolapplikation med C# och Visual Studio 2015. Applikationen ska slumpa i det slutna intervallet mellan 100 till 1000 tärningskast och presentera en frekvenstabell över förekomsten av ettor, tvåor, osv.
 
